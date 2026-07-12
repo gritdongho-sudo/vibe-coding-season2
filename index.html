@@ -1079,7 +1079,7 @@
     state.timeout = setTimeout(step, cfg.startDelay);
   }
 
-  const midSections = document.querySelectorAll('#curriculum, #benefits, #instructors, #survey, #apply, .footer-cta');
+  const midSections = document.querySelectorAll('.hero, #curriculum, #benefits, #instructors, #survey, #apply, .footer-cta');
   const visibleMid = new Set();
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const bgObserver = new IntersectionObserver((entries) => {
