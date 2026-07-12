@@ -207,6 +207,33 @@
   .info-table td:last-child{font-weight:600;}
   .info-table .sub{font-weight:400; color:var(--muted); font-size:0.9rem; margin-top:4px;}
 
+  .map-card{
+    margin-top:36px;
+    border:1px solid var(--panel-line);
+    border-radius:10px;
+    overflow:hidden;
+  }
+  .map-card iframe{display:block; filter:grayscale(0.15) contrast(1.05);}
+  .map-footer{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:16px;
+    flex-wrap:wrap;
+    background:var(--panel);
+    padding:16px 20px;
+    font-size:0.9rem;
+    color:var(--muted);
+  }
+  .map-footer a{
+    color:var(--lime);
+    text-decoration:none;
+    font-family:'Space Mono', monospace;
+    font-size:0.85rem;
+    white-space:nowrap;
+  }
+  .map-footer a:hover{text-decoration:underline;}
+
   .apply-panel{
     margin-top:36px;
     background:var(--panel);
@@ -721,6 +748,18 @@
       <tr><td>장소</td><td>성남 보평중학교 (예정)<div class="sub">장소 변경 시 문자로 안내드립니다.</div></td></tr>
       <tr><td>대상</td><td>체육선생님 (코딩 경험 무관)</td></tr>
     </table>
+
+    <div class="map-card reveal">
+      <iframe
+        src="https://maps.google.com/maps?q=37.3943377,127.1158162&z=16&output=embed"
+        width="100%" height="280" style="border:0;" loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="성남 보평중학교 지도"></iframe>
+      <div class="map-footer">
+        <span>성남 보평중학교 · 경기 성남시 분당구 동판교로 131</span>
+        <a href="https://www.google.com/maps/search/?api=1&query=37.3943377,127.1158162" target="_blank" rel="noopener">길찾기 →</a>
+      </div>
+    </div>
 
     <div class="apply-panel reveal">
       <div>
