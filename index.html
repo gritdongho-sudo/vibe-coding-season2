@@ -23,7 +23,7 @@
     background-image:
       radial-gradient(ellipse 900px 600px at 15% -5%, rgba(198,241,53,0.06), transparent 60%),
       radial-gradient(ellipse 700px 500px at 100% 20%, rgba(255,111,97,0.05), transparent 60%),
-      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Ctext x='6' y='30' font-family='monospace' font-size='15' fill='%232a2f3d'%3Econst vibe%3D%7B%7D%3B%3C/text%3E%3Ctext x='6' y='70' font-family='monospace' font-size='15' fill='%232a2f3d'%3Eif%28ai.ready%29%7B%3C/text%3E%3Ctext x='24' y='108' font-family='monospace' font-size='15' fill='%232a2f3d'%3Erun%28%29%3B%3C/text%3E%3Ctext x='6' y='146' font-family='monospace' font-size='15' fill='%232a2f3d'%3E%7D%20else%20%7B%3C/text%3E%3Ctext x='24' y='184' font-family='monospace' font-size='15' fill='%232a2f3d'%3Ewait%28%29%3B%3C/text%3E%3Ctext x='6' y='222' font-family='monospace' font-size='15' fill='%232a2f3d'%3E%7D%3C/text%3E%3C/svg%3E");
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Ctext x='6' y='30' font-family='monospace' font-size='15' fill='%232a2f3d' fill-opacity='0.35'%3Econst vibe%3D%7B%7D%3B%3C/text%3E%3Ctext x='6' y='70' font-family='monospace' font-size='15' fill='%232a2f3d' fill-opacity='0.35'%3Eif%28ai.ready%29%7B%3C/text%3E%3Ctext x='24' y='108' font-family='monospace' font-size='15' fill='%232a2f3d' fill-opacity='0.35'%3Erun%28%29%3B%3C/text%3E%3Ctext x='6' y='146' font-family='monospace' font-size='15' fill='%232a2f3d' fill-opacity='0.35'%3E%7D%20else%20%7B%3C/text%3E%3Ctext x='24' y='184' font-family='monospace' font-size='15' fill='%232a2f3d' fill-opacity='0.35'%3Ewait%28%29%3B%3C/text%3E%3Ctext x='6' y='222' font-family='monospace' font-size='15' fill='%232a2f3d' fill-opacity='0.35'%3E%7D%3C/text%3E%3C/svg%3E");
     background-repeat:no-repeat, no-repeat, repeat;
     background-attachment:fixed, fixed, fixed;
     color:var(--text);
@@ -32,6 +32,45 @@
     overflow-x:hidden;
   }
   .mono{font-family:'Space Mono', monospace;}
+
+  .bg-typer{
+    position:fixed;
+    inset:0;
+    width:100%; height:100%;
+    pointer-events:none;
+    opacity:0;
+    transition:opacity 1.2s ease;
+    z-index:-1;
+    overflow:hidden;
+  }
+  .bg-typer.show{opacity:1;}
+  .bg-stream{
+    position:absolute;
+    font-family:'Space Mono', monospace;
+    font-size:13px;
+    line-height:1.9;
+    color:rgba(198,241,53,0.08);
+    white-space:pre-wrap;
+    max-width:300px;
+  }
+  .bg-stream.pos-tl{top:12%; left:5%;}
+  .bg-stream.pos-tr{top:16%; right:5%; text-align:right; color:rgba(255,111,97,0.08);}
+  .bg-stream.pos-c{top:44%; left:50%; transform:translateX(-50%); text-align:center; max-width:380px; font-size:14px;}
+  .bg-stream.pos-bl{bottom:14%; left:6%; color:rgba(255,111,97,0.07);}
+  .bg-stream.pos-br{bottom:10%; right:5%; text-align:right;}
+  .bg-typer .caret{
+    display:inline-block;
+    width:7px; height:1em;
+    background:currentColor;
+    opacity:0.6;
+    vertical-align:text-bottom;
+    animation:blink 1s steps(1) infinite;
+  }
+
+  @media (max-width:900px){
+    .bg-stream.pos-tr, .bg-stream.pos-bl{display:none;}
+    .bg-stream{font-size:12px; max-width:220px;}
+  }
 
   .rail{position:fixed; top:0; left:0; width:3px; height:100%; background:var(--panel-line); z-index:100;}
   .rail-fill{width:100%; height:0%; background:var(--lime); box-shadow:0 0 12px var(--lime); transition:height 0.1s linear;}
@@ -77,28 +116,33 @@
     position:relative;
   }
   .hero-visual svg{width:100%; height:auto; display:block;}
+  .hero-top-banner{
+    text-align:center;
+    margin-bottom:36px;
+  }
   .hero-eyebrow{
-    font-size:0.95rem;
-    color:var(--muted);
-    margin-bottom:8px;
+    font-size:clamp(1.1rem, 2.2vw, 1.5rem);
+    font-weight:600;
+    color:var(--text);
+    margin-bottom:14px;
   }
   .hero-headline{
-    font-size:clamp(2.4rem, 6vw, 4.6rem);
+    font-size:clamp(1.7rem, 4.4vw, 3.4rem);
     font-weight:800;
-    line-height:1.15;
+    line-height:1.2;
     letter-spacing:-0.02em;
-    margin-bottom:10px;
+    margin-top:18px;
+    white-space:nowrap;
   }
   .hero-headline .line2{color:var(--lime);}
   .season-tag{
     display:inline-block;
     font-family:'Space Mono', monospace;
-    font-size:0.8rem;
+    font-size:1rem;
     color:var(--coral);
     border:1px solid var(--coral);
-    border-radius:20px;
-    padding:5px 14px;
-    margin-bottom:22px;
+    border-radius:24px;
+    padding:8px 22px;
   }
   .hero-sub{
     font-size:1.15rem;
@@ -137,6 +181,8 @@
   }
   .cta:hover{transform:translateY(-2px); box-shadow:0 8px 24px rgba(198,241,53,0.25);}
   .cta .arrow{font-family:'Space Mono', monospace;}
+  .hero-cta-wrap{text-align:center; margin-top:44px;}
+  .hero-cta-wrap .cta{margin-top:0;}
 
   section{padding:110px 0; border-top:1px solid var(--panel-line);}
   .reveal{opacity:0; transform:translateY(24px); transition:opacity 0.7s ease, transform 0.7s ease;}
@@ -194,6 +240,27 @@
   .feature-card .icon{margin-bottom:14px;}
   .feature-card h3{font-size:1.02rem;}
 
+  .instructor-grid{display:grid; grid-template-columns:1fr 1fr; gap:24px;}
+  .instructor-card{
+    background:var(--panel);
+    border:1px solid var(--panel-line);
+    border-radius:10px;
+    padding:36px 28px;
+    text-align:center;
+  }
+  .instructor-avatar{width:88px; height:88px; margin-bottom:18px;}
+  .instructor-name{font-size:1.25rem; font-weight:800; margin-bottom:6px;}
+  .instructor-role{color:var(--muted); font-size:0.92rem; margin-bottom:14px;}
+  .instructor-tag{
+    display:inline-block;
+    font-size:0.7rem;
+    letter-spacing:0.06em;
+    color:var(--lime);
+    border:1px solid var(--panel-line);
+    border-radius:20px;
+    padding:5px 14px;
+  }
+
   .info-table{width:100%; border-collapse:collapse; font-size:0.98rem;}
   .info-table tr{border-bottom:1px solid var(--panel-line);}
   .info-table tr:first-child{border-top:1px solid var(--panel-line);}
@@ -245,10 +312,10 @@
     gap:32px;
     align-items:center;
   }
-  .apply-panel .url-label{font-family:'Space Mono', monospace; font-size:0.8rem; color:var(--muted); margin-bottom:8px;}
+  .apply-panel .url-label{font-family:'Space Mono', monospace; font-size:0.72rem; color:var(--muted); margin-bottom:6px;}
   .apply-panel .url{
     font-family:'Space Mono', monospace;
-    font-size:1.3rem;
+    font-size:1rem;
     color:var(--lime);
     word-break:break-all;
   }
@@ -272,12 +339,14 @@
   .contact-row{
     margin-top:24px;
     display:flex;
-    gap:28px;
+    gap:22px;
     flex-wrap:wrap;
     font-family:'Space Mono', monospace;
-    font-size:0.9rem;
+    font-size:0.78rem;
     color:var(--muted);
   }
+  .contact-row .contact-item{display:flex; align-items:center; gap:7px;}
+  .contact-row svg{flex-shrink:0;}
   .contact-row span{color:var(--text);}
 
   /* SURVEY */
@@ -387,11 +456,62 @@
   .footer-cta h2{font-size:clamp(2rem, 5vw, 3.2rem); font-weight:800; margin-bottom:20px; letter-spacing:-0.02em;}
   .footer-cta .section-lede{margin-left:auto; margin-right:auto; text-align:center;}
   .footer-cta .cta{margin-left:auto; margin-right:auto;}
+
+  .footer-actions{
+    display:flex;
+    justify-content:center;
+    gap:14px;
+    flex-wrap:wrap;
+    margin-top:20px;
+  }
+  .ghost-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:12px 20px;
+    border:1px solid var(--panel-line);
+    border-radius:6px;
+    color:var(--muted);
+    text-decoration:none;
+    font-size:0.9rem;
+    transition:border-color 0.15s ease, color 0.15s ease;
+    background:none;
+    cursor:pointer;
+    font-family:'Pretendard', sans-serif;
+  }
+  .ghost-btn:hover{border-color:var(--lime); color:var(--text);}
+  .ghost-btn svg{flex-shrink:0;}
+  .ghost-btn.copied{border-color:var(--lime); color:var(--lime);}
+
+  footer.site-footer{
+    text-align:center;
+    padding:40px 0 60px;
+    color:var(--muted);
+  }
+  footer.site-footer .footer-title{
+    font-family:'Space Mono', monospace;
+    font-size:0.8rem;
+    margin-bottom:16px;
+  }
+  footer.site-footer .footer-links{
+    display:flex;
+    justify-content:center;
+    gap:18px;
+    flex-wrap:wrap;
+    font-family:'Space Mono', monospace;
+    font-size:0.78rem;
+  }
+  footer.site-footer .footer-links a{
+    color:var(--muted);
+    text-decoration:none;
+  }
+  footer.site-footer .footer-links a:hover{color:var(--lime);}
   footer{text-align:center; padding:40px 0 60px; color:var(--muted); font-family:'Space Mono', monospace; font-size:0.8rem;}
 
   @media (max-width:720px){
     .hero-grid{grid-template-columns:1fr; gap:32px;}
     .hero-visual{order:-1; max-width:320px; margin:0 auto;}
+    .hero-headline{white-space:normal; font-size:clamp(1.6rem, 7vw, 2.4rem);}
     .why-grid{grid-template-columns:1fr;}
     .feature-grid{grid-template-columns:1fr 1fr;}
     section{padding:70px 0;}
@@ -401,6 +521,7 @@
     .stat-grid{grid-template-columns:1fr;}
     .bar-row{grid-template-columns:110px 1fr 40px; gap:10px;}
     .quote-grid{grid-template-columns:1fr;}
+    .instructor-grid{grid-template-columns:1fr;}
   }
 
   @media (prefers-reduced-motion: reduce){
@@ -411,19 +532,26 @@
 </head>
 <body>
 
+<div class="bg-typer" id="bgTyper" aria-hidden="true">
+  <pre class="bg-stream pos-tl" id="bgTyper1"></pre>
+  <pre class="bg-stream pos-tr" id="bgTyper2"></pre>
+  <pre class="bg-stream pos-c" id="bgTyper3"></pre>
+  <pre class="bg-stream pos-bl" id="bgTyper4"></pre>
+  <pre class="bg-stream pos-br" id="bgTyper5"></pre>
+</div>
+
 <div class="rail"><div class="rail-fill" id="railFill"></div></div>
 
 <!-- HERO -->
 <section class="hero" style="border-top:none;">
   <div class="wrap">
+    <div class="hero-top-banner">
+      <div class="hero-eyebrow">처음 시작하는 체육선생님을 위한</div>
+      <span class="season-tag mono">바이브 코딩 연수 시즌 2</span>
+      <h1 class="hero-headline">바이브 코딩으로 <span class="line2">수업을 바꾸다!</span></h1>
+    </div>
     <div class="hero-grid">
       <div>
-        <div class="hero-eyebrow">처음 시작하는 체육선생님을 위한</div>
-        <span class="season-tag mono">연수 시즌 2</span>
-        <h1 class="hero-headline">
-          바이브 코딩으로<br>
-          <span class="line2">수업을 바꾸다!</span>
-        </h1>
         <p class="hero-sub">
           바이브 코딩으로 나만의 웹앱을 만들어 수업에 바로 활용해 보세요.
           코드를 몰라도, 아이디어만 있으면 충분합니다.
@@ -436,7 +564,9 @@
           <div class="out-line" style="color:var(--lime);">→ 선착순 마감 예정<span class="cursor"></span></div>
         </div>
 
-        <a href="https://bit.ly/pevibe0813" target="_blank" rel="noopener" class="cta">연수 신청하기 <span class="arrow">→</span></a>
+        <div class="hero-cta-wrap">
+          <a href="#page-bottom" class="cta">연수 신청 바로가기 <span class="arrow">→</span></a>
+        </div>
       </div>
 
       <div class="hero-visual">
@@ -490,7 +620,7 @@
           </g>
 
           <!-- floating badge: whistle -->
-          <g transform="translate(55,120)">
+          <g transform="translate(260,392)">
             <circle r="26" fill="#171b26" stroke="#2a2f3d"/>
             <circle r="9" cx="-2" cy="2" fill="none" stroke="#ff6f61" stroke-width="2.5"/>
             <line x1="4" y1="-4" x2="14" y2="-14" stroke="#ff6f61" stroke-width="2.5" stroke-linecap="round"/>
@@ -622,6 +752,54 @@
           <path d="M13 18l5 5 9 -9"/>
         </svg>
         <h3>수업에 바로 적용</h3>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INSTRUCTORS -->
+<section id="instructors">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="prompt">instructors.list()</div>
+      <h2 class="section-title">강사 소개</h2>
+      <p class="section-lede">현장에서 직접 체육 수업에 바이브 코딩을 적용해 본 체육교사가 강의합니다.</p>
+    </div>
+
+    <div class="instructor-grid reveal">
+      <div class="instructor-card">
+        <svg class="instructor-avatar" viewBox="0 0 96 96" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="48" cy="48" r="47" fill="#171b26" stroke="#2a2f3d" stroke-width="2"/>
+          <g transform="rotate(-30 48 48)" fill="none" stroke="#c6f135" stroke-width="2.2" stroke-linecap="round">
+            <ellipse cx="48" cy="30" rx="14" ry="18"/>
+            <line x1="48" y1="12" x2="48" y2="48"/>
+            <line x1="34" y1="30" x2="62" y2="30"/>
+            <line x1="37" y1="20" x2="59" y2="40"/>
+            <line x1="59" y1="20" x2="37" y2="40"/>
+            <line x1="48" y1="48" x2="48" y2="76"/>
+          </g>
+        </svg>
+        <div class="instructor-name">김동호</div>
+        <div class="instructor-role">성남 늘푸른중학교 체육교사</div>
+        <div class="instructor-tag mono">MAIN INSTRUCTOR</div>
+      </div>
+
+      <div class="instructor-card">
+        <svg class="instructor-avatar" viewBox="0 0 96 96" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="48" cy="48" r="47" fill="#171b26" stroke="#2a2f3d" stroke-width="2"/>
+          <g fill="none" stroke="#ff6f61" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="48" cy="48" r="20"/>
+            <polygon points="48,34 58,42 54,54 42,54 38,42"/>
+            <line x1="48" y1="34" x2="48" y2="28"/>
+            <line x1="58" y1="42" x2="66" y2="38"/>
+            <line x1="54" y1="54" x2="58" y2="62"/>
+            <line x1="42" y1="54" x2="38" y2="62"/>
+            <line x1="38" y1="42" x2="30" y2="38"/>
+          </g>
+        </svg>
+        <div class="instructor-name">김푸름</div>
+        <div class="instructor-role">성남 보평중학교 체육교사</div>
+        <div class="instructor-tag mono">CO-INSTRUCTOR</div>
       </div>
     </div>
   </div>
@@ -774,25 +952,52 @@
     </div>
 
     <div class="contact-row reveal">
-      <div>문의 · <span>성남 늘푸른중학교 교사 김동호</span></div>
-      <div>카카오톡 · <span>dongho0624</span></div>
+      <div class="contact-item">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#7a8296" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Z"/><path d="m3 6 9 7 9-7"/></svg>
+        문의 · <span>성남 늘푸른중학교 교사 김동호</span>
+      </div>
+      <div class="contact-item">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#7a8296" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Z"/><path d="m3 6 9 7 9-7"/></svg>
+        이메일 · <span>jown14@gmail.com</span>
+      </div>
+      <div class="contact-item">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#7a8296" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3C6.5 3 2 6.6 2 11c0 2.8 1.9 5.3 4.7 6.8-.2.8-.8 2.7-1 3.5-.2.9.3.9.7.6.3-.2 2.7-1.8 3.8-2.6.6.1 1.2.1 1.8.1 5.5 0 10-3.6 10-8s-4.5-8-10-8Z"/></svg>
+        카카오톡 · <span>dongho0624</span>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- FOOTER CTA -->
-<section class="footer-cta">
+<section class="footer-cta" id="final-cta">
   <div class="wrap">
     <div class="reveal">
       <div class="prompt" style="justify-content:center;">ready_to_start<span class="cursor"></span></div>
       <h2>지금 머뭇거리지 말고 바로 시작하세요!</h2>
       <p class="section-lede">완벽한 코드보다 완성된 아이디어가 먼저입니다.</p>
       <a href="https://bit.ly/pevibe0813" target="_blank" rel="noopener" class="cta">연수 신청하기 <span class="arrow">→</span></a>
+
+      <div class="footer-actions">
+        <button type="button" class="ghost-btn" id="copyEmailBtn" data-email="jown14@gmail.com">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Z"/><path d="m3 6 9 7 9-7"/></svg>
+          <span id="copyEmailLabel">이메일 문의</span>
+        </button>
+        <a class="ghost-btn" href="https://www.google.com/maps/search/?api=1&query=37.3943377,127.1158162" target="_blank" rel="noopener">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          오시는 길
+        </a>
+        <a class="ghost-btn" href="#apply">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+          신청 안내 다시 보기
+        </a>
+      </div>
     </div>
   </div>
 </section>
 
-<footer>바이브 코딩으로 수업을 바꾸다! · 연수 시즌 2</footer>
+<footer class="site-footer" id="page-bottom">
+  <div class="footer-title mono">바이브 코딩으로 수업을 바꾸다! · 연수 시즌 2</div>
+</footer>
 
 <script>
   const railFill = document.getElementById('railFill');
@@ -820,6 +1025,113 @@
     });
   }, {threshold:0.15});
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // background typing animation (mid-scroll ~ bottom)
+  const bgTyper = document.getElementById('bgTyper');
+  const streamConfigs = [
+    { el: document.getElementById('bgTyper1'), lines: [
+        "const teacher = '체육선생님';",
+        "ai.ask('기록 측정 앱 만들어줘');",
+        "app.save('나만의_도구.html');"
+      ], startDelay: 0 },
+    { el: document.getElementById('bgTyper2'), lines: [
+        "// 실습 진행중...",
+        "quiz.create({ subject: '체육' });",
+        "console.log('ready');"
+      ], startDelay: 600 },
+    { el: document.getElementById('bgTyper3'), lines: [
+        "vibe.coding.start();",
+        "→ 아이디어를 코드로",
+        "→ 오늘, 바로 완성"
+      ], startDelay: 1200 },
+    { el: document.getElementById('bgTyper4'), lines: [
+        "timer.set(90, 'sec');",
+        "sheet.connect('출석부');",
+        "export.toClass();"
+      ], startDelay: 300 },
+    { el: document.getElementById('bgTyper5'), lines: [
+        "// 선착순 마감 예정",
+        "apply.submit();",
+        "status: 'confirmed'"
+      ], startDelay: 900 }
+  ];
+
+  const streamState = streamConfigs.map(() => ({ running:false, timeout:null }));
+
+  function typeStream(cfg, state){
+    let lineIdx = 0, charIdx = 0, display = [];
+    function step(){
+      if(!state.running) return;
+      const line = cfg.lines[lineIdx];
+      if(charIdx <= line.length){
+        display[lineIdx] = line.slice(0, charIdx);
+        cfg.el.innerHTML = display.join('\n') + '<span class="caret"></span>';
+        charIdx++;
+        state.timeout = setTimeout(step, 45);
+      } else {
+        lineIdx++;
+        charIdx = 0;
+        if(lineIdx >= cfg.lines.length){
+          state.timeout = setTimeout(() => { display = []; lineIdx = 0; charIdx = 0; step(); }, 2200);
+        } else {
+          state.timeout = setTimeout(step, 400);
+        }
+      }
+    }
+    state.timeout = setTimeout(step, cfg.startDelay);
+  }
+
+  const midSections = document.querySelectorAll('#curriculum, #benefits, #instructors, #survey, #apply, .footer-cta');
+  const visibleMid = new Set();
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const bgObserver = new IntersectionObserver((entries) => {
+    if(prefersReducedMotion) return;
+    entries.forEach(e => {
+      if(e.isIntersecting) visibleMid.add(e.target.id || e.target.className);
+      else visibleMid.delete(e.target.id || e.target.className);
+    });
+    if(visibleMid.size > 0){
+      bgTyper.classList.add('show');
+      streamConfigs.forEach((cfg, i) => {
+        if(!streamState[i].running){
+          streamState[i].running = true;
+          typeStream(cfg, streamState[i]);
+        }
+      });
+    } else {
+      bgTyper.classList.remove('show');
+      streamState.forEach(state => {
+        state.running = false;
+        clearTimeout(state.timeout);
+      });
+    }
+  }, {threshold:0.15});
+  midSections.forEach(s => bgObserver.observe(s));
+
+  // copy email to clipboard
+  const copyEmailBtn = document.getElementById('copyEmailBtn');
+  const copyEmailLabel = document.getElementById('copyEmailLabel');
+  if(copyEmailBtn){
+    copyEmailBtn.addEventListener('click', async () => {
+      const email = copyEmailBtn.getAttribute('data-email');
+      try{
+        await navigator.clipboard.writeText(email);
+      }catch(err){
+        const temp = document.createElement('textarea');
+        temp.value = email;
+        document.body.appendChild(temp);
+        temp.select();
+        document.execCommand('copy');
+        document.body.removeChild(temp);
+      }
+      copyEmailBtn.classList.add('copied');
+      copyEmailLabel.textContent = '이메일 복사됨!';
+      setTimeout(() => {
+        copyEmailBtn.classList.remove('copied');
+        copyEmailLabel.textContent = '이메일 문의';
+      }, 2000);
+    });
+  }
 </script>
 
 </body>
