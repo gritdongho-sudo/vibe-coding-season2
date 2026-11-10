@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>바이브 코딩으로 수업을 바꾸다! 연수 시즌2</title>
+<title>바이브 코딩으로 수업을 바꾸다! 연수 레벨2</title>
 <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
 <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <style>
@@ -315,7 +315,7 @@
   .apply-panel .url-label{font-family:'Space Mono', monospace; font-size:1rem; color:var(--muted); margin-bottom:12px;}
   .apply-panel .url{
     font-family:'Space Mono', monospace;
-    font-size:clamp(1.8rem, 4vw, 2.6rem);
+    font-size:clamp(1.3rem, 3vw, 2rem);
     font-weight:700;
     color:var(--lime);
     word-break:break-all;
@@ -531,8 +531,58 @@
     .cursor{animation:none;}
   }
 </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
 </head>
 <body>
+
+<!-- ============================================================
+     ✏️ 여기만 수정하면 페이지 전체에 자동 반영됩니다.
+     날짜/장소/신청링크/설문 결과가 바뀔 때마다 이 블록의
+     값만 바꾸고 저장하면 됩니다. 아래로는 건드릴 필요 없습니다.
+     ============================================================ -->
+<script>
+  const SITE_CONFIG = {
+    // 히어로 화면에 짧게 표시되는 일시/장소
+    date: "2026.11.25(수) 17:30~19:30",
+    place: "성남 보평중학교 2층 수업분석실 (예정)",
+
+    // 신청 안내 표에 표시되는 일시 (형식만 다름, 같은 날짜)
+    applyDate: "2026. 11. 25.(수) 17:30 ~ 19:30",
+
+    // 신청 링크 (버튼, QR코드, 신청 URL 텍스트에 모두 자동 반영)
+    applyUrl: "https://forms.gle/g92ZPYhgww9D1oG97",
+
+    survey: {
+      respondents: 172,             // 총 응답자 수
+      satisfactionScore: "5.0",     // 전반적 만족도 (5점 만점)
+      satisfactionPct: 100,         // 만족도 도넛에 표시할 %
+      recommendPct: 99.4,           // 동료 교사 추천 의향 %
+      noteDateRange: "2026.7.11~11.3", // 설문 진행 기간 표기
+
+      // 항목별 점수/막대그래프 비율(%). 항목 키는 바꾸지 마세요.
+      bars: {
+        understand:  { score: "4.76", pct: 95.2 },
+        helpful:     { score: "4.94", pct: 98.8 },
+        practice:    { score: "4.86", pct: 97.1 },
+        explain:     { score: "4.95", pct: 99.1 },
+        expertise:   { score: "4.99", pct: 99.8 },
+        aiIntent:    { score: "4.95", pct: 99.1 },
+        applyPlan:   { score: "4.90", pct: 97.9 }
+      },
+
+      // 후기 카드 (최대 6개 권장, 개수를 늘리거나 줄여도 됩니다)
+      quotes: [
+        { quote: "바로 수업에 적용할 수 있는 살아있는 연수였습니다!", source: "고등학교 교사" },
+        { quote: "기초부터 심화까지 과제를 꼼꼼하게 단계별로 준비해주셔서 쉽게 따라갈 수 있었습니다.", source: "중학교 교사" },
+        { quote: "앱스크립트 확장 프로그램으로 학생들의 피드백까지 완료된 상황이 너무 기뻐요.", source: "중학교 교사" },
+        { quote: "강사분과 보조교사가 많으셔서 적절한 도움을 제때 받았습니다.", source: "중학교 교사" },
+        { quote: "웹사이트가 있어 혼자 복습하기에 좋을 것 같습니다.", source: "초등학교 교사" },
+        { quote: "코딩이 어려울 거라는 막연한 생각이 있었는데, 접근해보아도 좋겠다는 마음이 생겼습니다.", source: "중학교 교사" }
+      ]
+    }
+  };
+</script>
+<!-- ============================================================ -->
 
 <div class="bg-typer" id="bgTyper" aria-hidden="true">
   <pre class="bg-stream pos-tl" id="bgTyper1"></pre>
@@ -548,22 +598,22 @@
 <section class="hero" style="border-top:none;">
   <div class="wrap">
     <div class="hero-top-banner">
-      <div class="hero-eyebrow">처음 시작하는 체육선생님을 위한</div>
-      <span class="season-tag mono">바이브 코딩 연수 시즌 2</span>
+      <div class="hero-eyebrow">한 단계 더 나아가는 체육선생님을 위한</div>
+      <span class="season-tag mono">바이브 코딩 연수 레벨 2</span>
       <h1 class="hero-headline">바이브 코딩으로 <span class="line2">수업을 바꾸다!</span></h1>
     </div>
     <div class="hero-grid">
       <div>
         <p class="hero-sub">
-          바이브 코딩으로 나만의 웹앱을 만들어 수업에 바로 활용해 보세요.
-          코드를 몰라도, 아이디어만 있으면 충분합니다.
+          스프레드시트 자동화, 다양한 API 활용, 나만의 GitHub 사이트 배포까지.
+          만들어 본 웹앱을 한 단계 업그레이드해 보세요.
         </p>
 
         <div class="terminal-card">
-          <div class="out-line done">일시: 2026.8.13(목) 09:30~12:30</div>
-          <div class="out-line done">장소: 성남 보평중학교 (예정)</div>
-          <div class="out-line done">대상: 체육선생님, 코딩 경험 무관</div>
-          <div class="out-line done">시즌1 수강 여부 무관, 처음이어도 OK</div>
+          <div class="out-line done">일시: <span id="cfgDate">2026.11.25(수) 17:30~19:30</span></div>
+          <div class="out-line done">장소: <span id="cfgPlace">성남 보평중학교 2층 수업분석실 (예정)</span></div>
+          <div class="out-line done">대상: 체육선생님</div>
+          <div class="out-line done">자율연수 · 강사 자발적 봉사 연수</div>
           <div class="out-line" style="color:var(--lime);">→ 선착순 마감 예정<span class="cursor"></span></div>
         </div>
 
@@ -683,29 +733,29 @@
     <div class="reveal">
       <div class="prompt">cat curriculum.md</div>
       <h2 class="section-title">연수 내용</h2>
-      <p class="section-lede">기초부터 차근차근, 누구나 쉽게 따라할 수 있도록 3단계로 구성했습니다.</p>
+      <p class="section-lede">레벨 1에서 만든 웹앱을 한 단계 확장하는 3단계 실습으로 구성했습니다.</p>
     </div>
 
     <div class="curriculum reveal">
       <div class="module-row">
         <div class="module-idx">01</div>
         <div>
-          <div class="module-title">바이브 코딩의 기초</div>
-          <div class="module-desc">AI와 대화하며 결과물을 만드는 방법의 기본 원리와 도구 사용법을 익힙니다.</div>
+          <div class="module-title">On open 기능으로 스프레드시트 업그레이드하기</div>
+          <div class="module-desc">시트를 열 때 자동으로 실행되는 기능을 더해, 반복 작업을 줄이는 스프레드시트를 만듭니다.</div>
         </div>
       </div>
       <div class="module-row">
         <div class="module-idx">02</div>
         <div>
-          <div class="module-title">바이브 코딩의 실습</div>
-          <div class="module-desc">간단한 웹앱을 직접 만들어보며 AI 코딩 도구에 익숙해집니다.</div>
+          <div class="module-title">다양한 API로 나만의 웹앱 응용하기</div>
+          <div class="module-desc">여러 API를 연결해 기존 웹앱에 새로운 기능을 붙여봅니다.</div>
         </div>
       </div>
       <div class="module-row">
         <div class="module-idx">03</div>
         <div>
-          <div class="module-title">체육선생님을 위한 바이브 코딩 앱 만들기</div>
-          <div class="module-desc">기록 측정, 타이머, 모둠 뽑기 등 체육 수업에 바로 쓸 수 있는 나만의 웹앱을 완성합니다.</div>
+          <div class="module-title">HTML 코딩으로 나만의 GitHub 사이트 배포하기</div>
+          <div class="module-desc">직접 만든 HTML 페이지를 GitHub에 올려 누구나 접속할 수 있는 사이트로 공개합니다.</div>
         </div>
       </div>
     </div>
@@ -823,12 +873,12 @@
     <div class="reveal">
       <div class="prompt">satisfaction.json</div>
       <h2 class="section-title">실제로 만족했을까요?</h2>
-      <p class="section-lede">시즌 1 참가자 43명의 체육선생님이 응답한 만족도 조사 결과입니다.</p>
+      <p class="section-lede">지금까지 레벨 1 연수에 참여한 <span id="cfgRespondentsInline">172</span>명의 선생님이 응답한 만족도 조사 결과입니다.</p>
     </div>
 
     <div class="stat-grid reveal">
       <div class="stat-card">
-        <div class="stat-num">43명</div>
+        <div class="stat-num"><span id="cfgRespondents">63</span>명</div>
         <div class="stat-label">설문 참여</div>
       </div>
       <div class="stat-card donut-card">
@@ -837,56 +887,56 @@
           <circle cx="60" cy="60" r="50" fill="none" stroke="#c6f135" stroke-width="10"
             stroke-dasharray="314 314" stroke-dashoffset="314" stroke-linecap="round"
             transform="rotate(-90 60 60)" class="donut-arc" data-offset="0"/>
-          <text x="60" y="56" text-anchor="middle" font-family="Space Mono, monospace" font-size="20" font-weight="700" fill="#f1f0ea">5.0</text>
+          <text x="60" y="56" text-anchor="middle" font-family="Space Mono, monospace" font-size="20" font-weight="700" fill="#f1f0ea" id="cfgSatisfactionScore">5.0</text>
           <text x="60" y="74" text-anchor="middle" font-family="Space Mono, monospace" font-size="9" fill="#7a8296">/ 5</text>
         </svg>
-        <div class="stat-label">전반적 만족도 (100% 만족)</div>
+        <div class="stat-label">전반적 만족도 (<span id="cfgSatisfactionPct">100</span>% 만족)</div>
       </div>
       <div class="stat-card">
-        <div class="stat-num">97.7%</div>
+        <div class="stat-num"><span id="cfgRecommend">99.7</span>%</div>
         <div class="stat-label">동료 교사 추천 의향</div>
       </div>
     </div>
 
     <div class="bar-list reveal">
-      <div class="bar-row">
+      <div class="bar-row" data-key="understand">
         <div class="bar-label">이해하기 쉬웠다</div>
-        <div class="bar-track"><div class="bar-fill" data-w="95.8"></div></div>
-        <div class="bar-score">4.79</div>
+        <div class="bar-track"><div class="bar-fill" data-w="95.2"></div></div>
+        <div class="bar-score">4.76</div>
       </div>
-      <div class="bar-row">
+      <div class="bar-row" data-key="helpful">
         <div class="bar-label">수업에 도움된다</div>
         <div class="bar-track"><div class="bar-fill" data-w="99.0"></div></div>
         <div class="bar-score">4.95</div>
       </div>
-      <div class="bar-row">
+      <div class="bar-row" data-key="practice">
         <div class="bar-label">실습 시간 적절</div>
         <div class="bar-track"><div class="bar-fill" data-w="96.2"></div></div>
         <div class="bar-score">4.81</div>
       </div>
-      <div class="bar-row">
+      <div class="bar-row" data-key="explain">
         <div class="bar-label">강사 설명 이해도</div>
-        <div class="bar-track"><div class="bar-fill" data-w="100"></div></div>
-        <div class="bar-score">5.00</div>
+        <div class="bar-track"><div class="bar-fill" data-w="99.7"></div></div>
+        <div class="bar-score">4.98</div>
       </div>
-      <div class="bar-row">
+      <div class="bar-row" data-key="expertise">
         <div class="bar-label">강사 전문성</div>
         <div class="bar-track"><div class="bar-fill" data-w="100"></div></div>
         <div class="bar-score">5.00</div>
       </div>
-      <div class="bar-row">
+      <div class="bar-row" data-key="aiIntent">
         <div class="bar-label">AI·에듀테크 활용 의향</div>
         <div class="bar-track"><div class="bar-fill" data-w="99.0"></div></div>
         <div class="bar-score">4.95</div>
       </div>
-      <div class="bar-row">
+      <div class="bar-row" data-key="applyPlan">
         <div class="bar-label">실제 수업 적용 계획</div>
-        <div class="bar-track"><div class="bar-fill" data-w="98.6"></div></div>
-        <div class="bar-score">4.93</div>
+        <div class="bar-track"><div class="bar-fill" data-w="98.7"></div></div>
+        <div class="bar-score">4.94</div>
       </div>
     </div>
 
-    <div class="quote-grid reveal">
+    <div class="quote-grid reveal" id="cfgQuoteGrid">
       <div class="quote-card">
         <p>코딩을 체육수업에 적용하는 방법을 배운 점이 좋았습니다.</p>
         <div class="quote-source">중학교 체육교사</div>
@@ -900,19 +950,19 @@
         <div class="quote-source">중학교 체육교사</div>
       </div>
       <div class="quote-card">
-        <p>실습 내용이 체육 교육과정과 실제로 연결되어 있어 좋았습니다.</p>
-        <div class="quote-source">초등학교 체육교사</div>
+        <p>초보자인데도 전반적인 흐름을 이해할 수 있어 감사했습니다.</p>
+        <div class="quote-source">중학교 체육교사</div>
       </div>
       <div class="quote-card">
-        <p>막연하게만 느껴졌던 바이브 코딩을 친근하게 경험할 수 있었습니다.</p>
+        <p>도우미 선생님들이 계셔서 질문하기 편했습니다.</p>
         <div class="quote-source">고등학교 체육교사</div>
       </div>
       <div class="quote-card">
-        <p>같은 체육교사의 실제 현장 사례를 바탕으로 구성된 내용이 좋았습니다.</p>
+        <p>다시 수강할 기회를 얻어 반복의 힘을 느낀 연수였습니다.</p>
         <div class="quote-source">중학교 체육교사</div>
       </div>
     </div>
-    <div class="survey-note reveal">※ 2026.7.11 시즌1 참가자 설문 결과 (응답자 43명, 개인정보는 비공개 처리했습니다)</div>
+    <div class="survey-note reveal" id="cfgSurveyNote">※ 2026.7.11~11.3 레벨 1 참가자 설문 결과 (응답자 172명, 개인정보는 비공개 처리했습니다)</div>
   </div>
 </section>
 
@@ -924,10 +974,11 @@
       <h2 class="section-title">신청 안내</h2>
     </div>
     <table class="info-table reveal">
-      <tr><td>연수명</td><td>바이브 코딩으로 수업을 바꾸다! 연수 시즌 2</td></tr>
-      <tr><td>일시</td><td>2026. 8. 13.(목) 09:30 ~ 12:30</td></tr>
-      <tr><td>장소</td><td>성남 보평중학교 (예정)<div class="sub">장소 변경 시 문자로 안내드립니다.</div></td></tr>
-      <tr><td>대상</td><td>체육선생님 (코딩 경험 무관)<div class="sub">시즌 1을 듣지 않았어도 괜찮습니다. 처음 참여하셔도 좋습니다.</div></td></tr>
+      <tr><td>연수명</td><td>바이브 코딩으로 수업을 바꾸다! 연수 레벨 2</td></tr>
+      <tr><td>일시</td><td id="cfgApplyDate">2026. 11. 25.(수) 17:30 ~ 19:30</td></tr>
+      <tr><td>장소</td><td><span id="cfgApplyPlace">성남 보평중학교 2층 수업분석실 (예정)</span><div class="sub">장소 변경 시 문자로 안내드립니다.</div></td></tr>
+      <tr><td>대상</td><td>체육선생님</td></tr>
+      <tr><td>연수 형태</td><td>자율연수<div class="sub">자율 연수이므로 공문 발송이 어려울 수 있습니다.</div></td></tr>
     </table>
 
     <div class="map-card reveal">
@@ -945,13 +996,14 @@
     <div class="apply-panel reveal">
       <div>
         <div class="url-label">신청 URL</div>
-        <div class="url">bit.ly/pevibe0813</div>
+        <div class="url" id="cfgApplyUrlText">forms.gle/g92ZPYhgww9D1oG97</div>
       </div>
-      <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://bit.ly/pevibe0813" alt="신청 QR 코드">
+      <img id="cfgApplyQr" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https%3A%2F%2Fforms.gle%2Fg92ZPYhgww9D1oG97" alt="신청 QR 코드">
     </div>
 
     <div class="deadline-note reveal">
-      <strong>선착순 마감</strong> 예정입니다. 확정 명단에 대해서는 문자 및 공문 시행 드리도록 하겠습니다. 감사합니다.
+      <strong>선착순 마감</strong> 예정입니다. 확정 명단에 대해서는 문자로 안내 드리도록 하겠습니다.<br>
+      자율 연수이므로 공문 발송이 어려울 수 있습니다. 강사들의 자발적인 봉사 연수임을 이해해주시면 감사하겠습니다.
     </div>
 
     <div class="contact-row reveal">
@@ -962,10 +1014,6 @@
       <div class="contact-item">
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#7a8296" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Z"/><path d="m3 6 9 7 9-7"/></svg>
         이메일 · <span>jown14@gmail.com</span>
-      </div>
-      <div class="contact-item">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#7a8296" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3C6.5 3 2 6.6 2 11c0 2.8 1.9 5.3 4.7 6.8-.2.8-.8 2.7-1 3.5-.2.9.3.9.7.6.3-.2 2.7-1.8 3.8-2.6.6.1 1.2.1 1.8.1 5.5 0 10-3.6 10-8s-4.5-8-10-8Z"/></svg>
-        카카오톡 · <span>dongho0624</span>
       </div>
     </div>
   </div>
@@ -978,7 +1026,7 @@
       <div class="prompt" style="justify-content:center;">ready_to_start<span class="cursor"></span></div>
       <h2>지금 머뭇거리지 말고 바로 시작하세요!</h2>
       <p class="section-lede">완벽한 코드보다 완성된 아이디어가 먼저입니다.</p>
-      <a href="https://bit.ly/pevibe0813" target="_blank" rel="noopener" class="cta">연수 신청하기 <span class="arrow">→</span></a>
+      <a href="https://forms.gle/g92ZPYhgww9D1oG97" target="_blank" rel="noopener" class="cta" id="cfgApplyLink">연수 신청하기 <span class="arrow">→</span></a>
 
       <div class="footer-actions">
         <button type="button" class="ghost-btn" id="copyEmailBtn" data-email="jown14@gmail.com">
@@ -995,10 +1043,57 @@
 </section>
 
 <footer class="site-footer" id="page-bottom">
-  <div class="footer-title mono">바이브 코딩으로 수업을 바꾸다! · 연수 시즌 2</div>
+  <div class="footer-title mono">바이브 코딩으로 수업을 바꾸다! · 연수 레벨 2</div>
 </footer>
 
 <script>
+  // CONFIG 값을 페이지에 반영 (맨 위 SITE_CONFIG 블록만 수정하면 됨)
+  function applyConfig(){
+    const c = SITE_CONFIG;
+
+    document.getElementById('cfgDate').textContent = c.date;
+    document.getElementById('cfgPlace').textContent = c.place;
+    document.getElementById('cfgApplyPlace').textContent = c.place;
+    document.getElementById('cfgApplyDate').textContent = c.applyDate;
+
+    const urlText = c.applyUrl.replace(/^https?:\/\//, '');
+    document.getElementById('cfgApplyUrlText').textContent = urlText;
+    const qrImg = document.getElementById('cfgApplyQr');
+    if(typeof qrcode === 'function'){
+      const qr = qrcode(0, 'M');
+      qr.addData(c.applyUrl);
+      qr.make();
+      qrImg.src = qr.createDataURL(6, 2);
+    } else {
+      qrImg.src = 'https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=' + encodeURIComponent(c.applyUrl);
+    }
+    document.getElementById('cfgApplyLink').href = c.applyUrl;
+
+    document.getElementById('cfgRespondents').textContent = c.survey.respondents;
+    document.getElementById('cfgRespondentsInline').textContent = c.survey.respondents;
+    document.getElementById('cfgSatisfactionScore').textContent = c.survey.satisfactionScore;
+    document.getElementById('cfgSatisfactionPct').textContent = c.survey.satisfactionPct;
+    document.getElementById('cfgRecommend').textContent = c.survey.recommendPct;
+    document.getElementById('cfgSurveyNote').textContent =
+      `※ ${c.survey.noteDateRange} 레벨 1 참가자 설문 결과 (응답자 ${c.survey.respondents}명, 개인정보는 비공개 처리했습니다)`;
+
+    document.querySelectorAll('.bar-row').forEach(row => {
+      const key = row.getAttribute('data-key');
+      const data = c.survey.bars[key];
+      if(!data) return;
+      row.querySelector('.bar-score').textContent = data.score;
+      row.querySelector('.bar-fill').setAttribute('data-w', data.pct);
+    });
+
+    const quoteGrid = document.getElementById('cfgQuoteGrid');
+    if(c.survey.quotes && c.survey.quotes.length){
+      quoteGrid.innerHTML = c.survey.quotes.map(q =>
+        `<div class="quote-card"><p>${q.quote}</p><div class="quote-source">${q.source}</div></div>`
+      ).join('');
+    }
+  }
+  applyConfig();
+
   const railFill = document.getElementById('railFill');
   function updateRail(){
     const scrollTop = window.scrollY;
