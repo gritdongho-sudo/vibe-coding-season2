@@ -880,7 +880,7 @@
     <div class="reveal">
       <div class="prompt">satisfaction.json</div>
       <h2 class="section-title">실제로 만족했을까요?</h2>
-      <p class="section-lede">지금까지 레벨 1 연수에 참여한 <span id="cfgRespondentsInline">172</span>명의 선생님이 응답한 만족도 조사 결과입니다.</p>
+      <p class="section-lede">지금까지 시즌 1 연수에 참여한 <span id="cfgRespondentsInline">172</span>명의 선생님이 응답한 만족도 조사 결과입니다.</p>
     </div>
 
     <div class="stat-grid reveal">
@@ -969,7 +969,7 @@
         <div class="quote-source">중학교 체육교사</div>
       </div>
     </div>
-    <div class="survey-note reveal" id="cfgSurveyNote">※ 2026.7.11~11.3 레벨 1 참가자 설문 결과 (응답자 172명, 개인정보는 비공개 처리했습니다)</div>
+    <div class="survey-note reveal" id="cfgSurveyNote">※ 2026.7.11~11.3 시즌 1 참가자 설문 결과 (응답자 172명, 개인정보는 비공개 처리했습니다)</div>
   </div>
 </section>
 
@@ -1085,7 +1085,7 @@
     document.getElementById('cfgSatisfactionPct').textContent = c.survey.satisfactionPct;
     document.getElementById('cfgRecommend').textContent = c.survey.recommendPct;
     document.getElementById('cfgSurveyNote').textContent =
-      `※ ${c.survey.noteDateRange} 레벨 1 참가자 설문 결과 (응답자 ${c.survey.respondents}명, 개인정보는 비공개 처리했습니다)`;
+      `※ ${c.survey.noteDateRange} 시즌 1 참가자 설문 결과 (응답자 ${c.survey.respondents}명, 개인정보는 비공개 처리했습니다)`;
 
     document.querySelectorAll('.bar-row').forEach(row => {
       const key = row.getAttribute('data-key');
