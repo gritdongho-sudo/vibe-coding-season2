@@ -320,7 +320,14 @@
     color:var(--lime);
     word-break:break-all;
     line-height:1.2;
+    display:inline-block;
+    text-decoration:underline;
+    text-underline-offset:6px;
+    text-decoration-thickness:2px;
   }
+  .apply-panel .url:hover{color:var(--text);}
+  .apply-panel a img{transition:transform 0.15s ease;}
+  .apply-panel a:hover img{transform:scale(1.03);}
   .apply-panel img{
     width:180px; height:180px;
     border-radius:8px;
@@ -996,9 +1003,9 @@
     <div class="apply-panel reveal">
       <div>
         <div class="url-label">신청 URL</div>
-        <div class="url" id="cfgApplyUrlText">forms.gle/g92ZPYhgww9D1oG97</div>
+        <a class="url" id="cfgApplyUrlText" href="https://forms.gle/g92ZPYhgww9D1oG97" target="_blank" rel="noopener">forms.gle/g92ZPYhgww9D1oG97</a>
       </div>
-      <img id="cfgApplyQr" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https%3A%2F%2Fforms.gle%2Fg92ZPYhgww9D1oG97" alt="신청 QR 코드">
+      <a id="cfgApplyQrLink" href="https://forms.gle/g92ZPYhgww9D1oG97" target="_blank" rel="noopener"><img id="cfgApplyQr" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https%3A%2F%2Fforms.gle%2Fg92ZPYhgww9D1oG97" alt="신청 설문지 열기 (QR 코드)"></a>
     </div>
 
     <div class="deadline-note reveal">
@@ -1057,7 +1064,10 @@
     document.getElementById('cfgApplyDate').textContent = c.applyDate;
 
     const urlText = c.applyUrl.replace(/^https?:\/\//, '');
-    document.getElementById('cfgApplyUrlText').textContent = urlText;
+    const urlLink = document.getElementById('cfgApplyUrlText');
+    urlLink.textContent = urlText;
+    urlLink.href = c.applyUrl;
+    document.getElementById('cfgApplyQrLink').href = c.applyUrl;
     const qrImg = document.getElementById('cfgApplyQr');
     if(typeof qrcode === 'function'){
       const qr = qrcode(0, 'M');
